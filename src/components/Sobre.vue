@@ -16,8 +16,8 @@
         <!-- Conteúdo de texto -->
         <v-col cols="12" md="8">
           <v-card flat>
-            <v-card-title class="text-h5 font-weight-bold">Sobre mim 💭</v-card-title>
-            <v-card-subtitle class="text-subtitle-1 mb-4">
+            <v-card-title class="text-h4 font-weight-bold text-wrap">Sobre mim 💭</v-card-title>
+            <v-card-subtitle class="text-h6 text-wrap mb-4">
               Sou Desenvolvedor e estudante de Engenharia de Computação
             </v-card-subtitle>
 
