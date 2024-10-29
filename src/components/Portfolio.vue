@@ -88,7 +88,7 @@
 
               <v-container v-if="textoMinicurso"
                 :style="{ backgroundColor: textoMinicurso ? 'rgba(205, 0, 205, 0.8)' : 'transparent', borderRadius: '16px', height: '100%' }">
-                <span style="font-size: xx-large; color: white;">Backend em Ruby on Rails do Quadro de Atividade</span>
+                <span style="font-size: xx-large; color: white;">Mini-Curso Web</span>
                 <br>
                 <br>
                 <span style="font-size: large; color: white;">
