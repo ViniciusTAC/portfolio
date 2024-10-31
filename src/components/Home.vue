@@ -19,55 +19,26 @@
           <br><br>
           Vamos trabalhar juntos para criar algo incrível?
         </p>
+        <p style="color: #110d11;">Houve {{ contador }} acessos</p>
 
         <v-container class="d-flex justify-center flex-wrap">
-          <v-btn
-            variant="outlined"
-            class="ml-3"
-            color="primary"
-            icon="mdi-instagram"
-            href="https://www.instagram.com/vinicius.tac/"
-            target="_blank"
-            rel="noopener noreferrer"
-          ></v-btn>
+          <v-btn variant="outlined" class="ml-3" color="primary" icon="mdi-instagram"
+            href="https://www.instagram.com/vinicius.tac/" target="_blank" rel="noopener noreferrer"></v-btn>
 
-          <v-btn
-            variant="outlined"
-            class="ml-3"
-            color="primary"
-            icon="mdi-linkedin"
-            href="https://www.linkedin.com/in/vinícius-tadeu-andrade-costa/"
-            target="_blank"
-            rel="noopener noreferrer"
-          ></v-btn>
+          <v-btn variant="outlined" class="ml-3" color="primary" icon="mdi-linkedin"
+            href="https://www.linkedin.com/in/vinícius-tadeu-andrade-costa/" target="_blank"
+            rel="noopener noreferrer"></v-btn>
 
-          <v-btn
-            variant="outlined"
-            class="ml-3"
-            color="primary"
-            icon="mdi-github"
-            href="https://github.com/ViniciusTAC"
-            target="_blank"
-            rel="noopener noreferrer"
-          ></v-btn>
+          <v-btn variant="outlined" class="ml-3" color="primary" icon="mdi-github" href="https://github.com/ViniciusTAC"
+            target="_blank" rel="noopener noreferrer"></v-btn>
 
-          <v-btn
-            variant="outlined"
-            class="ml-3"
-            color="primary"
-            icon="mdi-email"
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=viniciustacosta@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          ></v-btn>
+          <v-btn variant="outlined" class="ml-3" color="primary" icon="mdi-email"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=viniciustacosta@gmail.com" target="_blank"
+            rel="noopener noreferrer"></v-btn>
         </v-container>
 
         <v-container class="d-flex justify-center mt-4">
-          <v-btn
-            style="background-color: rgba(205, 0, 205, 0.3);"
-            href="/ViniciusTadeuAndradeCosta.pdf"
-            download
-          >
+          <v-btn style="background-color: rgba(205, 0, 205, 0.3);" href="/ViniciusTadeuAndradeCosta.pdf" download>
             <v-icon>mdi-download</v-icon>
             Baixar Currículo
           </v-btn>
@@ -75,12 +46,8 @@
       </v-col>
 
       <v-col cols="12" md="4" class="d-flex justify-center align-center">
-        <v-img
-            width="50vw"
-            src="../assets/vinicius-home.jpg"
-            alt="Foto de Vinícius"
-            style="border-radius: 8px; border: 2px solid #ccc;"
-          ></v-img>
+        <v-img width="50vw" src="../assets/vinicius-home.jpg" alt="Foto de Vinícius"
+          style="border-radius: 8px; border: 2px solid #ccc;"></v-img>
       </v-col>
     </v-row>
   </v-container>
@@ -90,9 +57,26 @@
 export default {
   name: 'Home',
   data() {
-    return {};
+    return {
+      contador: 0
+    };
   },
-  methods: {},
+  created() {
+    this.inicializarContador();
+  },
+  methods: {
+    inicializarContador() {
+      // Verifica se há um contador salvo no localStorage
+      const contadorSalvo = localStorage.getItem("contadorAcessos");
+      this.contador = contadorSalvo ? parseInt(contadorSalvo) : 0;
+      this.incrementarContador();
+    },
+    incrementarContador() {
+      // Incrementa o contador e salva no localStorage
+      this.contador++;
+      localStorage.setItem("contadorAcessos", this.contador);
+    }
+  }
 }
 </script>
 
