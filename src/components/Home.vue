@@ -38,7 +38,7 @@
         </v-container>
 
         <v-container class="d-flex justify-center mt-4">
-          <v-btn style="background-color: rgba(205, 0, 205, 0.3);" href="/ViniciusTadeuAndradeCosta.pdf" download>
+          <v-btn style="background-color: rgba(205, 0, 205, 0.3);" href="/Currículo - Vinicius Tadeu Andrade Costa.pdf" download>
             <v-icon>mdi-download</v-icon>
             Baixar Currículo
           </v-btn>
