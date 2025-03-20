@@ -26,7 +26,7 @@
               <span v-if="!dialogoAberto" style="font-size: 1rem; line-height: 1.6;">
                 <p>
                   Durante minha carreira, passei por diversas oportunidades que me possibilitaram aplicar e expandir
-                  meus conhecimentos. Na SICOOB SAROMCREDI, atuei como Assistente de Desenvolvimento, focando no
+                  meus conhecimentos. Na SICOOB SAROM, atuei como Assistente de Desenvolvimento, focando no
                   desenvolvimento front-end com Vue.js, HTML, JavaScript e MySQL...
                 </p>
               </span>
