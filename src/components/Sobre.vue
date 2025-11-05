@@ -2,7 +2,6 @@
   <v-container style="max-width: 100vw; height: auto;">
     <v-card class="py-8 px-5 mx-auto" style="max-width: 100vw;">
       <v-row align="center">
-        <!-- Imagem -->
         <v-col cols="12" md="4" class="d-flex justify-center align-center">
           <v-img
             width="50vw"
@@ -13,55 +12,62 @@
           ></v-img>
         </v-col>
 
-        <!-- Conteúdo de texto -->
         <v-col cols="12" md="8">
           <v-card flat>
             <v-card-title class="text-h4 font-weight-bold text-wrap">Sobre mim 💭</v-card-title>
             <v-card-subtitle class="text-h6 text-wrap mb-4">
-              Sou Desenvolvedor e estudante de Engenharia de Computação
+              Engenheiro de Computação Formado e Desenvolvedor Full Stack
             </v-card-subtitle>
 
             <v-card-text>
-              <!-- Texto resumido -->
               <span v-if="!dialogoAberto" style="font-size: 1rem; line-height: 1.6;">
                 <p>
-                  Durante minha carreira, passei por diversas oportunidades que me possibilitaram aplicar e expandir
-                  meus conhecimentos. Na SICOOB SAROM, atuei como Assistente de Desenvolvimento, focando no
-                  desenvolvimento front-end com Vue.js, HTML, JavaScript e MySQL...
+                  Como **Engenheiro de Computação** e Desenvolvedor Full Stack, trago uma base sólida de
+                  conhecimento técnico e a experiência prática de ter atuado em todo o ciclo de vida do
+                  desenvolvimento de software. Minha formação foi marcada pela **excelência acadêmica**...
                 </p>
               </span>
 
-              <!-- Botão "Ler mais" -->
               <v-btn v-if="!dialogoAberto" color="primary" @click="abrirDialogo" class="mt-2">
                 Ler mais <v-icon icon="mdi-chevron-down" end></v-icon>
               </v-btn>
 
-              <!-- Texto completo -->
               <span v-if="dialogoAberto" style="font-size: 1rem; line-height: 1.6;">
                 <p>
-                  Durante minha carreira, passei por diversas oportunidades que me possibilitaram aplicar e expandir
-                  meus conhecimentos. Na SICOOB SAROMCREDI, atuei como Assistente de Desenvolvimento, focando no
-                  desenvolvimento front-end com Vue.js, HTML, JavaScript e MySQL. Nessa função, fui responsável pelo
-                  design e implementação de interfaces de usuário eficientes, colaborando estreitamente com a equipe
-                  para garantir uma experiência de alto desempenho e usabilidade.
+                  Como **Engenheiro de Computação** e Desenvolvedor Full Stack, trago uma base sólida de conhecimento
+                  técnico e a experiência prática de ter atuado em todo o ciclo de vida do desenvolvimento de software.
+                </p>
+                <br>
+<p>
+  Minha formação foi marcada pela **excelência acadêmica** e **dedicação a projetos de alto impacto**,
+  culminando em um **Trabalho de Conclusão de Curso (TCC) de destaque** focado na **Automação de Coleta e Estruturação de Dados da CVM para Análise Fundamentalista**.
+</p>
+<p>
+  Neste projeto, desenvolvi um software completo em **Python** seguindo uma arquitetura **ETL (Extração, Transformação e Carga)**. O sistema é capaz de coletar, processar e integrar grandes volumes de dados financeiros públicos da CVM (DFPs, ITRs, etc.) em um banco **SQLite**, permitindo a aplicação prática de análise fundamentalista e o cálculo de indicadores quantitativos. Esta realização demonstra minha proficiência em **arquitetura de software robusta, processamento de dados e otimização de sistemas** para fins de análise de negócios.
+</p>
+                <br>
+                <p>
+                  **Minha jornada profissional** inclui passagens por:
+                  <ul>
+                    <li>**SICOOB SAROMCREDI (Assistente de Desenvolvimento):** Foco no desenvolvimento front-end (Vue.js, HTML, JavaScript e MySQL), responsável pelo design e implementação de interfaces de usuário eficientes, garantindo alto desempenho e usabilidade.</li>
+                    <li>**FUSION Tecnologia (Estagiário de Desenvolvimento Full Stack):** Desenvolvimento de aplicações web utilizando Vue.js e Ruby on Rails, atuando na integração do front-end e back-end para uma experiência coesa.</li>
+                    <li>**Sítio Recanto do Queijo (Desenvolvedor de Software Júnior - Atual):** Criação de interfaces dinâmicas e integração com back-end usando Angular, Spring Boot e SQL Server, com foco em inovação e excelência técnica.</li>
+                  </ul>
                 </p>
                 <br>
                 <p>
-                  Depois, como Estagiário de Desenvolvimento na FUSION Tecnologia, desempenhei um papel fundamental no desenvolvimento de aplicações web como Desenvolvedor Full Stack, utilizando Vue.js e Ruby on Rails. Minha responsabilidade era criar interfaces de usuário integradas ao back-end, proporcionando uma experiência coesa para os usuários. Essa posição foi essencial para consolidar minha expertise em tecnologias de front-end e back-end.
+                  A experiência acumulada nessas funções me permitiu desenvolver uma **sólida compreensão de práticas de
+                  desenvolvimento de software, arquitetura de sistemas** e me tornar um profissional **resiliente,
+                  adaptável e comprometido com a evolução constante**. Possuo proficiência em Java, Python, JavaScript,
+                  SQL e familiaridade com Git/GitHub.
                 </p>
                 <br>
                 <p>
-                  Atualmente, atuo como Desenvolvedor de Software Júnior no Sítio Recanto do Queijo, onde trabalho com Angular, Spring Boot e SQL Server. Minha função envolve a criação de interfaces dinâmicas e a integração com o back-end, sempre buscando inovação e excelência técnica nos projetos. A experiência acumulada em cada uma dessas funções me permitiu desenvolver uma sólida compreensão de práticas de desenvolvimento de software e me tornar um profissional resiliente, adaptável e comprometido com a evolução constante na área.
-                </p>
-                <br>
-                <p>
-                  Com conhecimento em várias tecnologias, incluindo Java, Python, JavaScript, SQL e familiaridade com
-                  Git/GitHub, continuo buscando novos desafios e oportunidades para impactar positivamente a vida das
-                  pessoas através da tecnologia.
+                  Busco novos desafios para **impactar positivamente a vida das pessoas através de soluções tecnológicas
+                  eficientes e escaláveis**.
                 </p>
               </span>
 
-              <!-- Botão "Ler menos" -->
               <v-btn v-if="dialogoAberto" color="primary" @click="dialogoAberto = false" class="mt-2">
                 Ler menos <v-icon icon="mdi-chevron-up" end></v-icon>
               </v-btn>
