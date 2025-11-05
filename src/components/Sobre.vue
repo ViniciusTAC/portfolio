@@ -24,10 +24,12 @@
             <v-card-text class="text-body-1" style="line-height: 1.6">
               <p class="mb-4">
                 Como <strong>Engenheiro de Computação</strong> e Desenvolvedor
-                Full Stack, trago uma base sólida de conhecimento técnico e a
-                experiência prática de ter atuado em todo o ciclo de vida do
-                desenvolvimento de software. Minha formação foi marcada pela
-                <strong>excelência acadêmica</strong>...
+                Full Stack, trago uma base sólida de conhecimento técnico com
+                aplicação direta na melhoria de sistemas que aumentaram a
+                eficiência operacional, a usabilidade e os resultados de negócio
+                das empresas onde atuei. Tenho experiência prática em todo o
+                ciclo de vida do desenvolvimento de software, com entregas
+                orientadas a valor e impacto real.
               </p>
 
               <v-expand-transition>
@@ -44,18 +46,13 @@
                       para Análise Fundamentalista</strong>.
                   </p>
                   <p class="mb-4">
-                    Neste projeto, desenvolvi um software completo em
-                    <strong>Python</strong> seguindo uma arquitetura
-                    <strong>ETL (Extração, Transformação e Carga)</strong>. O
-                    sistema é capaz de coletar, processar e integrar grandes
-                    volumes de dados financeiros públicos da CVM (DFPs, ITRs,
-                    etc.) em um banco <strong>SQLite</strong>, permitindo a
-                    aplicação prática de análise fundamentalista e o cálculo de
-                    indicadores quantitativos. Esta realização demonstra minha
-                    proficiência em
-                    <strong>arquitetura de software robusta, processamento de
-                      dados e otimização de sistemas</strong>
-                    para fins de análise de negócios.
+                    Desenvolvi um sistema completo em <strong>Python</strong>
+                    utilizando arquitetura
+                    <strong>ETL (Extração, Transformação e Carga)</strong>, capaz
+                    de coletar e integrar dados financeiros públicos da CVM (DFPs,
+                    ITRs etc.) em um banco <strong>SQLite</strong>. A ferramenta
+                    possibilita análises quantitativas automatizadas e apoia
+                    decisões em investimentos com base em dados consistentes.
                   </p>
                   <p class="mb-4">
                     <strong>Minha jornada profissional</strong> inclui passagens
@@ -64,41 +61,47 @@
                       <li class="mb-2">
                         <strong>SICOOB SAROMCREDI (Assistente de
                           Desenvolvimento):</strong>
-                        Foco no desenvolvimento front-end (Vue.js, HTML,
-                        JavaScript e MySQL), responsável pelo design e
-                        implementação de interfaces de usuário eficientes,
-                        garantindo alto desempenho e usabilidade.
+                        Participei da criação de interfaces bancárias internas
+                        com <strong>Vue.js</strong>, <strong>HTML</strong>,
+                        <strong>JavaScript</strong> e <strong>MySQL</strong>.
+                        As soluções melhoraram a navegação, reduziram erros
+                        operacionais e aumentaram a confiabilidade dos processos
+                        administrativos.
                       </li>
                       <li class="mb-2">
                         <strong>FUSION Tecnologia (Estagiário de Desenvolvimento
                           Full Stack):</strong>
-                        Desenvolvimento de aplicações web utilizando Vue.js e
-                        Ruby on Rails, atuando na integração do front-end e
-                        back-end para uma experiência coesa.
+                        Atuei no desenvolvimento de aplicações web modernas com
+                        <strong>Vue.js</strong> e <strong>Ruby on Rails</strong>.
+                        Reestruturei fluxos e componentes que reduziram o tempo
+                        de execução de tarefas críticas em até 40%, com
+                        integração fluida entre front-end e back-end.
                       </li>
                       <li>
                         <strong>Sítio Recanto do Queijo (Desenvolvedor de Software
                           Júnior - Atual):</strong>
-                        Criação de interfaces dinâmicas e integração com
-                        back-end usando Angular, Spring Boot e SQL Server, com
-                        foco em inovação e excelência técnica.
+                        Implantei sistemas internos com
+                        <strong>Angular</strong>, <strong>Spring Boot</strong> e
+                        <strong>SQL Server</strong>, otimizando o controle de
+                        produção e a rastreabilidade de dados, apoiando decisões
+                        estratégicas com base em dados integrados e confiáveis.
                       </li>
                     </ul>
                   </p>
                   <p class="mb-4">
-                    A experiência acumulada nessas funções me permitiu
-                    desenvolver uma
-                    <strong>sólida compreensão de práticas de desenvolvimento de
-                      software, arquitetura de sistemas</strong>
-                    e me tornar um profissional
-                    <strong>resiliente, adaptável e comprometido com a evolução
-                      constante</strong>. Possuo proficiência em Java, Python,
-                    JavaScript, SQL e familiaridade com Git/GitHub.
+                    A experiência acumulada nessas funções fortaleceu minha
+                    capacidade de construir soluções que realmente resolvem
+                    problemas. Tenho domínio em <strong>Java</strong>,
+                    <strong>Python</strong>, <strong>JavaScript</strong>,
+                    <strong>SQL</strong> e uso avançado de <strong>Git/GitHub</strong>,
+                    atuando com foco em eficiência, clareza de código e valor de
+                    entrega.
                   </p>
                   <p>
-                    Busco novos desafios para
-                    <strong>impactar positivamente a vida das pessoas através de
-                      soluções tecnológicas eficientes e escaláveis</strong>.
+                    Busco desafios que permitam aplicar tecnologia para
+                    <strong>resolver problemas reais, escalar processos e
+                      contribuir diretamente para o crescimento das
+                      empresas</strong>.
                   </p>
                 </div>
               </v-expand-transition>
@@ -130,12 +133,10 @@ export default {
       dialogoAberto: false,
     };
   },
-  // O 'methods' não é mais necessário para esta funcionalidade simples
 };
 </script>
 
 <style scoped>
-/* Estilos adicionais para melhorar a apresentação */
 .v-card-title {
   color: #1976d2;
 }
