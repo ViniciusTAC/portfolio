@@ -4,15 +4,11 @@
       <v-row align="center">
         <v-col cols="12" md="4" class="d-flex justify-center align-center">
           <v-img
+            width="50vw"
+            height=""
             src="../assets/vinicius_sobre.jpg"
             alt="Foto de Vinícius"
-            aspect-ratio="1"
-            cover
-            style="
-              border-radius: 8px;
-              border: 2px solid #ccc;
-              max-width: 300px;
-            "
+            style="border-radius: 8px; border: 2px solid #ccc;"
           ></v-img>
         </v-col>
 
