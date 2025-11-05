@@ -46,13 +46,11 @@
                       para Análise Fundamentalista</strong>.
                   </p>
                   <p class="mb-4">
-                    Desenvolvi um sistema completo em <strong>Python</strong>
-                    utilizando arquitetura
-                    <strong>ETL (Extração, Transformação e Carga)</strong>, capaz
-                    de coletar e integrar dados financeiros públicos da CVM (DFPs,
-                    ITRs etc.) em um banco <strong>SQLite</strong>. A ferramenta
-                    possibilita análises quantitativas automatizadas e apoia
-                    decisões em investimentos com base em dados consistentes.
+  <strong>
+    Este projeto pode ser visto em detalhes na seção acima, ou clicando
+    em "TCC" no menu superior (ou na barra lateral, caso esteja no
+    celular).
+  </strong>
                   </p>
                   <p class="mb-4">
                     <strong>Minha jornada profissional</strong> inclui passagens
