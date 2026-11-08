@@ -1,88 +1,59 @@
 <template>
-  <v-app class="teste">
-    <v-main>
-      <v-app-bar app class="pr-3">
-        <!-- Ícone de menu que aparece em telas menores -->
-        <v-app-bar-nav-icon
-          @click="drawer = !drawer"
-          class="d-md-none"
-        ></v-app-bar-nav-icon>
+  <div class="shell">
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-        <!-- Espaço para alinhar o conteúdo à direita -->
-        <v-spacer></v-spacer>
+    <header class="barra">
+      <button class="marca" type="button" @click="ir('Home')">
+        KOVINE<span class="cursor" aria-hidden="true"></span>
+      </button>
 
-        <!-- Botões que aparecem somente em telas maiores -->
-        <div class="d-none d-md-flex">
-          <v-chip class="pa-0 ma-0 mr-3" color="primary" variant="outlined">
-            <v-btn color="primary" @click="adicionarRota('Home')">
-              <v-icon icon="mdi-home" start></v-icon>
-              Início
-            </v-btn>
-          </v-chip>
+      <button
+        class="abrir-menu"
+        type="button"
+        aria-controls="nav-principal"
+        :aria-expanded="menuAberto"
+        @click="menuAberto = !menuAberto"
+      >
+        {{ menuAberto ? "FECHAR" : "MENU" }}
+      </button>
 
-          <v-chip class="pa-0 ma-0 mr-3" color="primary" variant="outlined">
-            <v-btn color="primary" @click="adicionarRota('TCC')">
-              <v-icon icon="mdi-book" start></v-icon>
-              TCC
-            </v-btn>
-          </v-chip>
+      <nav
+        id="nav-principal"
+        class="nav"
+        :class="{ aberto: menuAberto }"
+        aria-label="Seções do site"
+      >
+        <a
+          v-for="(item, i) in itens"
+          :key="item.rota"
+          :href="item.caminho"
+          :class="{ ativo: ativo === item.rota }"
+          :aria-current="ativo === item.rota ? 'true' : null"
+          @click.prevent="ir(item.rota)"
+        >
+          <kbd>{{ i + 1 }}</kbd>{{ item.rotulo }}
+        </a>
+      </nav>
+    </header>
 
-          <v-chip class="pa-0 ma-0 mr-3" color="primary" variant="outlined">
-            <v-btn color="primary" @click="adicionarRota('Servicos')">
-              <v-icon icon="mdi-room-service-outline" start></v-icon>
-              Serviços
-            </v-btn>
-          </v-chip>
-
-          <v-chip class="pa-0 ma-0 mr-3" color="primary" variant="outlined">
-            <v-btn color="primary" @click="adicionarRota('Portfolio')">
-              <v-icon icon="mdi-cards" start></v-icon>
-              Portfólio
-            </v-btn>
-          </v-chip>
-
-          <v-chip class="pa-0 ma-0 mr-3" color="primary" variant="outlined">
-            <v-btn color="primary" @click="adicionarRota('Contato')">
-              <v-icon icon="mdi-phone" start></v-icon>
-              Contato
-            </v-btn>
-          </v-chip>
-
-          <v-chip class="pa-0 ma-0 mr-3" color="primary" variant="outlined">
-            <v-btn color="primary" @click="adicionarRota('Sobre')">
-              <v-icon icon="mdi-information" start></v-icon>
-              Sobre
-            </v-btn>
-          </v-chip>
-        </div>
-      </v-app-bar>
-
-      <!-- Menu lateral para telas menores -->
-      <v-navigation-drawer v-model="drawer" app temporary class="d-md-none">
-        <v-list-item @click="adicionarRota('Home')">Início</v-list-item>
-        <v-list-item @click="adicionarRota('TCC')">TCC</v-list-item>
-        <v-list-item @click="adicionarRota('Servicos')">Serviços</v-list-item>
-        <v-list-item @click="adicionarRota('Portfolio')">Portfólio</v-list-item>
-        <v-list-item @click="adicionarRota('Contato')">Contato</v-list-item>
-        <v-list-item @click="adicionarRota('Sobre')">Sobre</v-list-item>
-      </v-navigation-drawer>
-
+    <main id="conteudo">
       <home id="Home" />
-      <Tcc />
+      <sobre id="Sobre" />
+      <tcc />
       <servicos id="Servicos" />
       <portfolio id="Portfolio" />
       <contato id="Contato" />
-      <sobre id="Sobre" />
+    </main>
 
-      <v-bottom-navigation fluid app fixed class="bottom-navigation-custom">
-        <br />
-        <span class="copyright-text">
-          Copyright <span class="copyright-symbol">©</span> 2024 feito por
-          Vinícius Tadeu Andrade Costa (Kovine). Todos os direitos reservados.
+    <footer class="rodape">
+      <div class="miolo rodape-linha">
+        <span>© {{ ano }} Vinícius Tadeu Andrade Costa (Kovine)</span>
+        <span v-if="visitas">
+          visita nº {{ visitas }} neste navegador
         </span>
-      </v-bottom-navigation>
-    </v-main>
-  </v-app>
+      </div>
+    </footer>
+  </div>
 </template>
 
 <script>
@@ -94,79 +65,226 @@ import Sobre from "./components/Sobre.vue";
 import Tcc from "./components/Tcc.vue";
 
 export default {
-  components: {
-    Tcc,
-    Home,
-    Servicos,
-    Portfolio,
-    Contato,
-    Sobre,
-  },
+  components: { Tcc, Home, Servicos, Portfolio, Contato, Sobre },
   data() {
     return {
-      currentPage: "Home",
-      drawer: false, // Controle do menu lateral para telas pequenas
+      menuAberto: false,
+      ativo: "Home",
+      visitas: "",
+      ano: new Date().getFullYear(),
+      itens: [
+        { rota: "Home", rotulo: "Início", caminho: "/" },
+        { rota: "Sobre", rotulo: "Sobre", caminho: "/sobre" },
+        { rota: "TCC", rotulo: "TCC", caminho: "/tcc" },
+        { rota: "Servicos", rotulo: "Stack", caminho: "/servico" },
+        { rota: "Portfolio", rotulo: "Projetos", caminho: "/portfolio" },
+        { rota: "Contato", rotulo: "Contato", caminho: "/contato" },
+      ],
     };
-  },
-  methods: {
-    adicionarRota(texto) {
-      this.$router
-        .push({ name: texto })
-        .then(() => {
-          this.rolarParaSecao(texto);
-          this.drawer = false; // Fecha o menu após a navegação
-        })
-        .catch(() => {});
-    },
-    rolarParaSecao(texto) {
-      const elemento = document.getElementById(texto);
-      if (elemento) {
-        const alturaAppBar = 64; // altura do app-bar em pixels
-        const posicaoElemento =
-          elemento.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({
-          top: posicaoElemento - alturaAppBar,
-          behavior: "smooth",
-        });
-      }
-    },
   },
   watch: {
     $route(to) {
-      this.rolarParaSecao(to.name);
+      this.rolarPara(to.name);
+    },
+  },
+  created() {
+    this.contarVisita();
+  },
+  mounted() {
+    window.addEventListener("keydown", this.atalho);
+
+    // Marca no menu a seção que está no meio da tela
+    this.observador = new IntersectionObserver(
+      (entradas) => {
+        entradas.forEach((e) => {
+          if (e.isIntersecting) this.ativo = e.target.id;
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+    this.itens.forEach((item) => {
+      const el = document.getElementById(item.rota);
+      if (el) this.observador.observe(el);
+    });
+
+    // Link direto (ex.: /sobre): espera fontes e layout para acertar a posição
+    this.$router
+      .isReady()
+      .then(() => document.fonts.ready)
+      .then(() => {
+        if (this.$route.name !== "Home") this.rolarPara(this.$route.name, "auto");
+      });
+  },
+  beforeUnmount() {
+    window.removeEventListener("keydown", this.atalho);
+    if (this.observador) this.observador.disconnect();
+  },
+  methods: {
+    ir(rota) {
+      this.menuAberto = false;
+      if (this.$route.name === rota) {
+        this.rolarPara(rota);
+      } else {
+        this.$router.push({ name: rota }).catch(() => {});
+      }
+    },
+    rolarPara(rota, comportamento) {
+      const el = document.getElementById(rota);
+      if (!el) return;
+      const semAnimacao = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      el.scrollIntoView({
+        behavior: comportamento || (semAnimacao ? "auto" : "smooth"),
+        block: "start",
+      });
+    },
+    // Teclas 1 a 6 navegam entre as seções, como num menu de BIOS
+    atalho(e) {
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      if (/^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+      const item = this.itens[Number(e.key) - 1];
+      if (item) this.ir(item.rota);
+    },
+    contarVisita() {
+      try {
+        const total = (parseInt(localStorage.getItem("contadorAcessos")) || 0) + 1;
+        localStorage.setItem("contadorAcessos", total);
+        this.visitas = String(total).padStart(4, "0");
+      } catch (erro) {
+        this.visitas = "";
+      }
     },
   },
 };
 </script>
 
 <style scoped>
-.bottom-navigation-custom .copyright-text {
-  font-size: 1rem;
-  /* Tamanho padrão */
+.pular {
+  position: fixed;
+  top: -60px;
+  left: 16px;
+  z-index: 60;
+  padding: 8px 14px;
+  background: var(--ambar);
+  color: #000;
 }
 
-.bottom-navigation-custom .copyright-symbol {
+.pular:focus {
+  top: 8px;
+}
+
+.barra {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--barra);
+  padding-inline: var(--margem);
+  background: var(--fundo);
+  border-bottom: 1px solid var(--linha);
+}
+
+.marca {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--texto);
+  font-family: var(--fonte-tela);
+  font-size: 1.9rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.abrir-menu {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid var(--magenta);
+  background: none;
+  color: var(--magenta);
+  font-family: var(--fonte-mono);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.nav {
+  display: flex;
+  height: 100%;
+}
+
+.nav a {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-inline: 14px;
+  font-family: var(--fonte-mono);
+  font-size: 0.88rem;
+  text-decoration: none;
+  color: var(--texto-2);
+}
+
+.nav a:hover {
+  color: var(--texto);
+}
+
+.nav a.ativo {
+  background: var(--ambar);
+  color: #000;
+  font-weight: 600;
+}
+
+kbd {
+  font-family: inherit;
   font-size: 0.75rem;
-  /* Tamanho padrão para o símbolo */
-  vertical-align: super;
-  font-weight: bold;
+  color: var(--magenta);
 }
 
-/* Tamanho menor para telas pequenas */
-@media (max-width: 600px) {
-  .bottom-navigation-custom .copyright-text {
-    font-size: 0.8rem;
-  }
-
-  .bottom-navigation-custom .copyright-symbol {
-    font-size: 0.65rem;
-  }
+.ativo kbd {
+  color: #000;
 }
 
-/* Tamanho maior para telas médias */
-@media (min-width: 600px) and (max-width: 960px) {
-  .bottom-navigation-custom .copyright-text {
-    font-size: 0.9rem;
+.rodape {
+  border-top: 1px solid var(--linha);
+  padding-block: 22px;
+  font-family: var(--fonte-mono);
+  font-size: 0.8rem;
+  color: var(--texto-2);
+}
+
+.rodape-linha {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 32px;
+}
+
+@media (max-width: 820px) {
+  .abrir-menu {
+    display: block;
+  }
+
+  .nav {
+    display: none;
+    position: absolute;
+    top: var(--barra);
+    left: 0;
+    right: 0;
+    height: auto;
+    flex-direction: column;
+    background: var(--painel);
+    border-bottom: 2px solid var(--magenta);
+  }
+
+  .nav.aberto {
+    display: flex;
+  }
+
+  .nav a {
+    padding: 14px var(--margem);
+    border-top: 1px solid var(--linha);
+    font-size: 1rem;
   }
 }
 </style>

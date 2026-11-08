@@ -1,59 +1,36 @@
 <template>
-  <v-container style="max-width: 100vw; height: auto; min-height: 100vh;">
-    <br />
-    <v-container max-width="100vw" class="text-center">
-      <v-row justify="center">
-        <h1 class="competencias-titulo">Minhas <span style="color: #cd00cd;">Competências</span></h1>
-      </v-row>
-      <v-row>
-        <v-col cols="12" md="4" v-for="competencia in competencias" :key="competencia.titulo">
-          <v-card :color="competencia.corCard" style="border-radius: 16px;" variant="outlined" align="center"
-            class="botao-expandir" @mouseover="competencia.corCard = 'primary'" @mouseleave="competencia.corCard = ''"
-            @click="abrirDialogo(competencia.titulo)">
-            <v-card-item>
-             
-                <v-col class="text-center">
-                  <v-icon :icon="competencia.icon" size="50" color="primary" class="ma-0 pa-0"></v-icon>
-                </v-col>
-                <v-col>
-                  <h2 class="text-h4 text-sm-h4 text-xs-h5 text-wrap ma-0" style="color: white; white-space: normal;">
-                    {{ competencia.titulo }}
-                  </h2>
-                </v-col>
-             
-            </v-card-item>
+  <section class="secao">
+    <div class="miolo">
+      <h2 class="titulo"><span>04</span>Stack</h2>
 
-            <v-card-text class="competencias-texto">
-              <span style="font-size: large; color: white;">
-                <p>{{ competencia.resumo }}</p>
-                <br>
-              </span>
-              <v-btn color="primary" class="mt-3" @click="abrirDialogo(competencia.titulo)">
-                Ver mais <v-icon icon="mdi-chevron-down" end></v-icon>
-              </v-btn>
-            </v-card-text>
+      <div class="abas" role="group" aria-label="Escolha uma tecnologia">
+        <button
+          v-for="(item, i) in competencias"
+          :key="item.titulo"
+          type="button"
+          :aria-pressed="aberta === i"
+          @click="aberta = i"
+        >
+          {{ item.titulo }}
+        </button>
+      </div>
 
-            <!-- Diálogo com o texto completo -->
-            <v-dialog v-model="competencia.dialogoAberto" max-width="90vw">
-              <v-card>
-                <v-card-title class="text-center">
-                  <h2>{{ competencia.titulo }}</h2>
-                </v-card-title>
-                <v-card-text>
-                  <p v-for="paragrafo in competencia.textoCompleto" :key="paragrafo">{{ paragrafo }}<br><br></p>
+      <div class="painel" aria-live="polite">
+        <dl class="dados">
+          <div v-for="dado in atual.dados" :key="dado.nome">
+            <dt class="rotulo">{{ dado.nome }}</dt>
+            <dd>{{ dado.valor }}</dd>
+          </div>
+        </dl>
 
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="primary" @click="competencia.dialogoAberto = false">Fechar</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-container>
+        <div class="texto">
+          <p v-for="paragrafo in atual.texto" :key="paragrafo">
+            {{ paragrafo }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -61,86 +38,139 @@ export default {
   name: "Competencias",
   data() {
     return {
+      aberta: 0,
       competencias: [
         {
-          titulo: "Desenvolvimento Web",
-          icon: "mdi-code-tags",
-          resumo: "Minha jornada no desenvolvimento web começou com o curso Técnico em Informática oferecido pelo Pronatec do Governo Federal. Foi nesse ambiente que tive meu primeiro contato com a criação de websites e sistemas simples, utilizando tecnologias fundamentais como HTML, CSS e JavaScript. Esses primeiros projetos, apesar de básicos, foram cruciais para construir uma compreensão sólida dos princípios do ...",
-          textoCompleto: [
-            "Minha jornada no desenvolvimento web começou com o curso Técnico em Informática oferecido pelo Pronatec do Governo Federal. Foi nesse ambiente que tive meu primeiro contato com a criação de websites e sistemas simples, utilizando tecnologias fundamentais como HTML, CSS e JavaScript. Esses primeiros projetos, apesar de básicos, foram cruciais para construir uma compreensão sólida dos princípios do desenvolvimento web, tanto no front-end quanto no back-end. Através deles, pude aprimorar minhas habilidades em lógica de programação, design de interfaces e na integração de funcionalidades dinâmicas em páginas.",
-            "Após essa formação, ingressei na faculdade, onde aprofundei meus conhecimentos e descobri novas ferramentas e práticas. Minha primeira experiência profissional foi como Assistente de Desenvolvimento no SICOOB Saromcredi, onde trabalhei com Vue.js, Node.js, JavaScript e MySQL. Nesse papel, fui responsável por projetar e implementar interfaces web de usuário eficientes e atraentes, sempre buscando soluções que atendessem às necessidades dos usuários finais.",
-            "Os conhecimentos adquiridos em Vue.js me levaram a uma nova oportunidade como Estagiário de Desenvolvimento na Fusion Tecnologia. Lá, atuei como desenvolvedor full-stack, aplicando meus conhecimentos em Vue.js e Ruby on Rails para criar aplicações web dinâmicas e interativas. A experiência de trabalhar em equipe e desenvolver soluções integradas foi fundamental para meu crescimento profissional.",
-            "Atualmente, sou Desenvolvedor de Software Júnior no Sítio Recanto do Queijo, onde utilizo Angular, Spring Boot e SQL Server para criar aplicativos dinâmicos e eficientes. Estou sempre em busca de inovações e aprendizados, e cada novo projeto me motiva a explorar ainda mais as possibilidades do desenvolvimento web. A evolução constante da tecnologia me inspira a criar soluções sofisticadas e eficazes, entregando experiências web que realmente fazem a diferença.",
-            "Estou animado para continuar essa jornada, sempre aprendendo e enfrentando novos desafios no mundo do desenvolvimento web."
+          titulo: "Java + Spring",
+          dados: [
+            { nome: "Uso hoje", valor: "APIs e módulos back-end com Spring Boot" },
+            { nome: "No dia a dia", valor: "APIs REST, regras de negócio, integrações, ERP" },
+            { nome: "Primeiro contato", valor: "Técnico em Informática, Pronatec" },
+            { nome: "Já implementei", valor: "Enxame de Partículas (PSO)" },
           ],
-          dialogoAberto: false,
-          corCard: ""
+          texto: [
+            "Java e Spring Boot são a base do meu trabalho. No Sítio Recanto do Queijo desenvolvo APIs e módulos back-end para os sistemas corporativos usados na operação: analiso a demanda e a regra de negócio, implemento, integro com banco de dados e outros sistemas e cuido da sustentação em produção.",
+            "Como júnior, entrei contribuindo com a evolução do ERP da empresa, traduzindo regras de negócio em lógica back-end e construindo APIs REST para integrar os módulos. Como pleno, passei a participar também da definição técnica das soluções e da modernização de sistemas legados.",
+            "Meu primeiro contato com Java foi no Técnico em Informática do Pronatec, e foi o que despertou meu interesse por programação. Na faculdade aprofundei em Programação Orientada a Objetos: encapsulamento, herança e polimorfismo.",
+            "Nessa disciplina implementei o algoritmo de Otimização por Enxame de Partículas (PSO) para minimizar funções como Esfera, Rosenbrock e Rastrigin. Foi quando a teoria começou a fazer sentido para mim na prática.",
+          ],
+        },
+        {
+          titulo: "SQL",
+          dados: [
+            { nome: "Uso hoje", valor: "SQL Server" },
+            { nome: "Já usei", valor: "MySQL" },
+            { nome: "No dia a dia", valor: "Consultas, views, procedures, relatórios, modelagem relacional" },
+          ],
+          texto: [
+            "Boa parte do valor de um sistema corporativo está no dado. Hoje crio e otimizo consultas, views, procedures e estruturas relacionais em SQL Server para atender às regras de negócio e dar suporte à operação.",
+            "Como júnior no Sítio Recanto do Queijo, elaborei consultas avançadas e relatórios que organizaram os dados da operação para apoiar análises e decisões gerenciais.",
+            "Antes disso, no Sicoob Sarom, construí consultas e relatórios complexos em MySQL para transformar dados operacionais em informação de apoio à decisão.",
+          ],
         },
         {
           titulo: "Python",
-          icon: "mdi-language-python",
-          resumo: "Minha jornada com Python começou no primeiro período da graduação, quando um colega mencionou uma linguagem nova que não exigia o uso de ponto e vírgula no final das linhas. Depois, fiz um curso ministrado por um veterano, onde aprendi os conceitos básicos da linguagem. Durante a disciplina de Cálculo Numérico, me aproximei ainda mais do Python, e desde então, ele se tornou uma das minhas ferramentas favoritas. Essa ...",
-          textoCompleto: [
-            "Minha jornada com Python começou no primeiro período da graduação, quando um colega mencionou uma linguagem nova que não exigia o uso de ponto e vírgula no final das linhas. Depois, fiz um curso ministrado por um veterano, onde aprendi os conceitos básicos da linguagem. Durante a disciplina de Cálculo Numérico, me aproximei ainda mais do Python, e desde então, ele se tornou uma das minhas ferramentas favoritas. Essa disciplina me permitiu visualizar de forma prática o quão poderosa e versátil Python é, especialmente para resolver problemas matemáticos complexos.",
-            "Fiquei profundamente impressionado com a quantidade de bibliotecas e recursos disponíveis, que parecem não ter fim. Isso me fez perceber como Python se adapta a diversas áreas do conhecimento. Posteriormente, mergulhei ainda mais no universo dessa linguagem, explorando seu uso em aplicações mais avançadas, como no campo da Inteligência Artificial.",
-            "O Python novamente se destacou, provando ser uma ferramenta extremamente eficiente para lidar com grandes volumes de dados, permitindo desde a manipulação e análise de conjuntos massivos de dados até a criação de algoritmos complexos para machine learning. Essa flexibilidade fez com que Python se tornasse uma escolha comum entre desenvolvedores, cientistas de dados e pesquisadores.",
-            "Ao longo do tempo, na disciplina de Banco de Dados II, tivemos que implementar uma árvore B+, que é utilizada no funcionamento dos bancos de dados. Esse desenvolvimento me fez perceber como essas estruturas complexas podem ser manipuladas nesta linguagem. Também tive a oportunidade de trabalhar na disciplina de Compiladores, onde o trabalho final envolvia a criação de um compilador que recebia um texto e simulava o comportamento de um compilador, realizando análises e retornando como seria a árvore de sintaxe.",
-            "Atualmente, Python é uma das minhas principais ferramentas utilizadas em projetos no meu trabalho como desenvolvedor júnior no Sítio Recanto do Queijo e também no desenvolvimento do meu TCC, sendo essencial para ambas as experiências."
+          dados: [
+            { nome: "Uso hoje", valor: "Automação e pipelines de integração" },
+            { nome: "Primeiro contato", valor: "1º período da graduação" },
+            { nome: "Já implementei", valor: "Árvore B+, compilador, ETL da CVM" },
           ],
-          dialogoAberto: false,
-          corCard: ""
+          texto: [
+            "Conheci Python no primeiro período da graduação, quando um colega comentou sobre uma linguagem nova que não exigia ponto e vírgula no final das linhas. Depois fiz um curso dado por um veterano e aprendi o básico.",
+            "Em Cálculo Numérico a linguagem virou uma das minhas ferramentas favoritas, porque ali vi na prática como ela resolve problemas matemáticos complexos. Mais tarde usei Python também em Inteligência Artificial e no tratamento de grandes volumes de dados.",
+            "Em Banco de Dados II implementei uma árvore B+, a estrutura usada no funcionamento dos bancos de dados. Em Compiladores, o trabalho final foi um programa que recebia um texto, fazia as análises e devolvia a árvore de sintaxe.",
+            "No trabalho, uso Python para automatizar a coleta, o tratamento e a estruturação de dados, com scripts e pipelines de integração que reduzem o esforço manual da equipe. Também foi a linguagem do meu TCC.",
+          ],
         },
         {
-          titulo: "Java",
-          icon: "mdi-language-java",
-          resumo: "Minha jornada com Java começou durante o curso Técnico em Informática oferecido pelo Pronatec, do Governo Federal. Nesse curso, tive meu primeiro contato com a linguagem e suas características, o que despertou meu interesse pela programação. Posteriormente, na faculdade, tive a oportunidade de aprofundar meus conhecimentos na disciplina de Programação Orientada a Objetos (POO), ond explorei conceitos fundamentais ...",
-          textoCompleto: [
-            "Minha jornada com Java começou durante o curso Técnico em Informática oferecido pelo Pronatec, do Governo Federal. Nesse curso, tive meu primeiro contato com a linguagem e suas características, o que despertou meu interesse pela programação. Posteriormente, na faculdade, tive a oportunidade de aprofundar meus conhecimentos na disciplina de Programação Orientada a Objetos (POO), onde explorei conceitos fundamentais como encapsulamento, herança e polimorfismo.",
-            "Durante essa disciplina, desenvolvi um trabalho utilizando o algoritmo de Otimização por Enxame de Partículas (PSO) para calcular a potência mínima de funções como Esfera, Rosenbrock e Rastrigin. A implementação desse algoritmo me permitiu aplicar conhecimentos teóricos de forma prática e entender melhor como diferentes funções podem ser otimizadas.",
-            "Essa experiência não apenas aprimorou minhas habilidades em programação, mas também me proporcionou uma compreensão prática de como a linguagem pode ser aplicada na resolução de problemas matemáticos e computacionais.",
-            "Atualmente, no meu trabalho no Sítio Recanto do Queijo, utilizo Java como backend, empregando o framework Spring Boot. Essa escolha tem sido essencial para o desenvolvimento de aplicações robustas e escaláveis. O Spring Boot facilita a criação de microserviços, permitindo que eu implemente funcionalidades de forma ágil e eficiente, proporcionando uma experiência mais rica e responsiva aos usuários do sistema.",
-            "Essa trajetória com Java tem sido gratificante e continua a me motivar a explorar novos desafios e inovações na área de desenvolvimento."
+          titulo: "Web",
+          dados: [
+            { nome: "Uso hoje", valor: "Angular, PrimeNG, TypeScript" },
+            { nome: "Já usei", valor: "Vue.js, Vuetify, Node.js, ASP Classic" },
+            { nome: "Primeiro contato", valor: "Técnico em Informática, Pronatec" },
           ],
-          dialogoAberto: false,
-          corCard: ""
-        }
-      ]
+          texto: [
+            "Comecei no curso Técnico em Informática do Pronatec, criando sites e sistemas simples com HTML, CSS e JavaScript. Eram projetos básicos, mas foi ali que aprendi lógica de programação e como ligar uma interface a alguma funcionalidade de verdade.",
+            "O primeiro emprego veio no Sicoob Sarom, mantendo sistemas em ASP Classic e participando da migração de um ERP legado para uma arquitetura web mais moderna, com Vue.js, Vuetify e Node.js.",
+            "O Vue.js me levou ao estágio na Fusion Tecnologia, onde desenvolvi telas e componentes com Vuetify e integrei as interfaces a um back-end em Ruby on Rails.",
+            "Hoje, no Sítio Recanto do Queijo, implemento interfaces em Angular, PrimeNG e TypeScript conectadas ao back-end em Spring Boot.",
+          ],
+        },
+      ],
     };
   },
-  methods: {
-    abrirDialogo(titulo) {
-      const competencia = this.competencias.find(c => c.titulo === titulo);
-      competencia.dialogoAberto = true;
-    }
-  }
+  computed: {
+    atual() {
+      return this.competencias[this.aberta];
+    },
+  },
 };
 </script>
 
 <style scoped>
-.competencias-titulo {
-  font-size: 2.5rem;
+.abas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
 }
 
-.competencias-texto {
-  font-size: 1.2rem;
-  color: white;
+.abas button {
+  padding: 6px 24px 4px;
+  border: 1px solid var(--linha);
+  border-bottom: 0;
+  background: var(--painel);
+  color: var(--texto-2);
+  font-family: var(--fonte-tela);
+  font-size: 1.7rem;
+  line-height: 1.1;
+  cursor: pointer;
 }
 
-.botao-expandir {
-  transition: transform 0.3s;
+.abas button:hover {
+  color: var(--texto);
 }
 
-.botao-expandir:hover {
-  transform: scale(1.05);
+.abas button[aria-pressed="true"] {
+  background: var(--magenta);
+  border-color: var(--magenta);
+  color: #000;
 }
 
-@media (max-width: 600px) {
-  .competencias-titulo {
-    font-size: 2rem;
+.painel {
+  display: grid;
+  grid-template-columns: minmax(200px, 3fr) minmax(0, 7fr);
+  gap: clamp(28px, 5vw, 64px);
+  padding: clamp(20px, 4vw, 40px);
+  border: 1px solid var(--magenta);
+  /* mantém a altura estável ao trocar de aba */
+  min-height: 430px;
+}
+
+.dados > div + div {
+  margin-top: 20px;
+}
+
+.dados dd {
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+.texto {
+  max-width: 68ch;
+}
+
+.texto p + p {
+  margin-top: 16px;
+}
+
+@media (max-width: 820px) {
+  .abas button {
+    padding-inline: 14px;
   }
 
-  .competencias-texto {
-    font-size: 1rem;
+  .painel {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
   }
 }
 </style>

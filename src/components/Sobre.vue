@@ -1,144 +1,233 @@
 <template>
-  <v-container style="height: auto">
-    <v-card class="py-8 px-5 mx-auto">
-      <v-row align="center">
-        <v-col cols="12" md="4" class="d-flex justify-center align-center">
-          <v-img
-            width="50vw"
-            height=""
-            src="../assets/vinicius_sobre.jpg"
-            alt="Foto de Vinícius"
-            style="border-radius: 8px; border: 2px solid #ccc;"
-          ></v-img>
-        </v-col>
+  <section class="secao">
+    <div class="miolo">
+      <h2 class="titulo"><span>02</span>Sobre</h2>
 
-        <v-col cols="12" md="8">
-          <v-card flat>
-            <v-card-title class="text-h4 font-weight-bold text-wrap">
-              Sobre mim 💭
-            </v-card-title>
-            <v-card-subtitle class="text-h6 text-wrap mb-4">
-              Engenheiro de Computação Formado e Desenvolvedor Full Stack
-            </v-card-subtitle>
+      <div class="grade">
+        <div class="historia">
+          <img
+            :src="foto"
+            alt="Vinícius usando headphone"
+            width="900"
+            height="1212"
+          />
+          <p>
+            Sou formado em Engenharia de Computação pelo IFMG e trabalho
+            principalmente no back-end, com Java, Spring Boot, SQL Server, Python
+            e Node.js: regras de negócio, modelagem relacional, APIs, integração
+            entre sistemas e sustentação de aplicações em produção.
+          </p>
+          <p>
+            Comecei no Técnico em Informática do Pronatec. O primeiro emprego na
+            área foi no Sicoob Sarom, mantendo sistemas em ASP Classic e
+            participando da migração de um ERP legado. Foi a base prática da
+            minha carreira em software corporativo.
+          </p>
+          <p>
+            No front-end atuo quando precisa, com Angular, PrimeNG, TypeScript e
+            Vue.js, principalmente em interfaces integradas ao back-end.
+          </p>
 
-            <v-card-text class="text-body-1" style="line-height: 1.6">
-              <p class="mb-4">
-                Como <strong>Engenheiro de Computação</strong> e Desenvolvedor
-                Full Stack, trago uma base sólida de conhecimento técnico com
-                aplicação direta na melhoria de sistemas que aumentaram a
-                eficiência operacional, a usabilidade e os resultados de negócio
-                das empresas onde atuei. Tenho experiência prática em todo o
-                ciclo de vida do desenvolvimento de software, com entregas
-                orientadas a valor e impacto real.
-              </p>
+          <dl class="extras">
+            <div v-for="item in extras" :key="item.nome">
+              <dt class="rotulo">{{ item.nome }}</dt>
+              <dd>{{ item.valor }}</dd>
+            </div>
+          </dl>
+        </div>
 
-              <v-expand-transition>
-                <div v-show="dialogoAberto">
-                  <p class="mb-4">
-                    Minha formação foi marcada pela
-                    <strong>excelência acadêmica</strong> e
-                    <strong>dedicação a projetos de alto impacto</strong>,
-                    culminando em um
-                    <strong>Trabalho de Conclusão de Curso (TCC) de
-                      destaque</strong>
-                    focado na
-                    <strong>Automação de Coleta e Estruturação de Dados da CVM
-                      para Análise Fundamentalista</strong>.
-                  </p>
-                  <p class="mb-4">
-  <strong>
-    Este projeto pode ser visto em detalhes na seção acima, ou clicando
-    em "TCC" no menu superior (ou na barra lateral, caso esteja no
-    celular).
-  </strong>
-                  </p>
-                  <p class="mb-4">
-                    <strong>Minha jornada profissional</strong> inclui passagens
-                    por:
-                    <ul class="ml-5 mt-4 mb-4">
-                      <li class="mb-2">
-                        <strong>SICOOB SAROMCREDI (Assistente de
-                          Desenvolvimento):</strong>
-                        Participei da criação de interfaces bancárias internas
-                        com <strong>Vue.js</strong>, <strong>HTML</strong>,
-                        <strong>JavaScript</strong> e <strong>MySQL</strong>.
-                        As soluções melhoraram a navegação, reduziram erros
-                        operacionais e aumentaram a confiabilidade dos processos
-                        administrativos.
-                      </li>
-                      <li class="mb-2">
-                        <strong>FUSION Tecnologia (Estagiário de Desenvolvimento
-                          Full Stack):</strong>
-                        Atuei no desenvolvimento de aplicações web modernas com
-                        <strong>Vue.js</strong> e <strong>Ruby on Rails</strong>.
-                        Reestruturei fluxos e componentes que reduziram o tempo
-                        de execução de tarefas críticas em até 40%, com
-                        integração fluida entre front-end e back-end.
-                      </li>
-                      <li>
-                        <strong>Sítio Recanto do Queijo (Desenvolvedor de Software
-                          Júnior - Atual):</strong>
-                        Implantei sistemas internos com
-                        <strong>Angular</strong>, <strong>Spring Boot</strong> e
-                        <strong>SQL Server</strong>, otimizando o controle de
-                        produção e a rastreabilidade de dados, apoiando decisões
-                        estratégicas com base em dados integrados e confiáveis.
-                      </li>
-                    </ul>
-                  </p>
-                  <p class="mb-4">
-                    A experiência acumulada nessas funções fortaleceu minha
-                    capacidade de construir soluções que realmente resolvem
-                    problemas. Tenho domínio em <strong>Java</strong>,
-                    <strong>Python</strong>, <strong>JavaScript</strong>,
-                    <strong>SQL</strong> e uso avançado de <strong>Git/GitHub</strong>,
-                    atuando com foco em eficiência, clareza de código e valor de
-                    entrega.
-                  </p>
-                  <p>
-                    Busco desafios que permitam aplicar tecnologia para
-                    <strong>resolver problemas reais, escalar processos e
-                      contribuir diretamente para o crescimento das
-                      empresas</strong>.
-                  </p>
-                </div>
-              </v-expand-transition>
-
-              <v-btn
-                color="primary"
-                @click="dialogoAberto = !dialogoAberto"
-                class="mt-4"
-              >
-                {{ dialogoAberto ? 'Ler menos' : 'Ler mais' }}
-                <v-icon
-                  :icon="dialogoAberto ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-                  end
-                ></v-icon>
-              </v-btn>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-card>
-  </v-container>
+        <ol class="log" aria-label="Experiência profissional">
+          <li v-for="item in experiencia" :key="item.cargo">
+            <p class="estado" :class="{ atual: item.atual }">
+              [{{ item.periodo }}]
+            </p>
+            <h3>{{ item.empresa }}</h3>
+            <p class="cargo">{{ item.cargo }}</p>
+            <ul class="feitos">
+              <li v-for="feito in item.feitos" :key="feito">{{ feito }}</li>
+            </ul>
+            <p class="rotulo pilha">{{ item.pilha }}</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
+import foto from "../assets/vinicius_sobre-900.jpg";
+
 export default {
   name: "Sobre",
   data() {
     return {
-      dialogoAberto: false,
+      foto,
+      extras: [
+        { nome: "Formação", valor: "Bacharelado em Engenharia de Computação, IFMG (01/2017 a 09/2025)" },
+        { nome: "Técnico", valor: "Técnico em Informática, Pronatec (2014 a 2015)" },
+        { nome: "Certificações", valor: "Docker: criando e gerenciando containers; Python Avançado; TypeScript parte 3" },
+        { nome: "Ferramentas", valor: "Git, GitHub, GitLab, Docker, CI/CD, Kanban" },
+        { nome: "Idiomas", valor: "Inglês e espanhol intermediários" },
+        { nome: "Local", valor: "São Roque de Minas, MG" },
+      ],
+      experiencia: [
+        {
+          empresa: "Sítio Recanto do Queijo",
+          cargo: "Engenheiro de Software Pleno",
+          periodo: "07/2025 - atual",
+          atual: true,
+          feitos: [
+            "Desenvolvi e evoluí APIs e módulos back-end em Java, Spring Boot e Node.js, com as regras de negócio dos sistemas corporativos usados na operação.",
+            "Integrei sistemas internos, bancos de dados e APIs REST para dar suporte aos fluxos operacionais e logísticos da empresa.",
+            "Criei e otimizei consultas, views e procedures em SQL Server.",
+            "Automatizei a coleta, o tratamento e a estruturação de dados com Python, reduzindo o esforço manual da equipe.",
+            "Implementei interfaces em Angular, PrimeNG e TypeScript conectadas ao back-end.",
+          ],
+          pilha: "Java / Spring Boot / SQL Server / Python / Node.js / Angular / Docker / CI/CD",
+        },
+        {
+          empresa: "Sítio Recanto do Queijo",
+          cargo: "Engenheiro de Software Júnior",
+          periodo: "02/2024 - 07/2025",
+          feitos: [
+            "Contribuí para a evolução do ERP da empresa com funcionalidades em Java e Spring Boot, traduzindo regras de negócio em lógica back-end.",
+            "Implementei e mantive APIs REST para integrar os módulos do ERP.",
+            "Desenvolvi scripts e pipelines de integração em Python para automatizar processos operacionais.",
+            "Elaborei consultas SQL avançadas e relatórios para apoiar análises e decisões gerenciais.",
+          ],
+          pilha: "Java / Spring Boot / SQL Server / Python / Node.js / Docker",
+        },
+        {
+          empresa: "Fusion Tecnologia",
+          cargo: "Estagiário de Desenvolvimento de Software",
+          periodo: "10/2023 - 01/2024",
+          feitos: [
+            "Desenvolvi telas e componentes reativos com Vue.js e Vuetify para aplicações web corporativas.",
+            "Integrei as interfaces ao back-end em Ruby on Rails.",
+            "Apoiei a manutenção e a evolução das aplicações, versionando com Git e GitLab.",
+          ],
+          pilha: "Vue.js / Vuetify / Ruby on Rails / Git / GitLab",
+        },
+        {
+          empresa: "Sicoob Sarom",
+          cargo: "Assistente de Desenvolvimento",
+          periodo: "04/2021 - 02/2022",
+          feitos: [
+            "Contribuí para a modernização de um ERP legado, participando da migração de ASP Classic para uma arquitetura web moderna.",
+            "Desenvolvi funcionalidades com Vue.js, Vuetify e Node.js para interfaces usadas nas rotinas internas.",
+            "Construí consultas e relatórios complexos em MySQL para apoiar a tomada de decisão.",
+          ],
+          pilha: "ASP Classic / Vue.js / Vuetify / Node.js / MySQL",
+        },
+      ],
     };
   },
 };
 </script>
 
 <style scoped>
-.v-card-title {
-  color: #1976d2;
+.grade {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(36px, 7vw, 88px);
 }
-.v-card-subtitle {
-  color: #555;
+
+.historia img {
+  float: left;
+  width: 42%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: 40% 30%;
+  margin: 6px 22px 12px 0;
+  border: 1px solid var(--ambar);
+  filter: grayscale(1) contrast(1.15);
+}
+
+.historia p + p {
+  margin-top: 18px;
+}
+
+.extras {
+  clear: both;
+  padding-top: 28px;
+}
+
+.extras > div {
+  padding-block: 10px;
+  border-top: 1px solid var(--linha);
+}
+
+.extras dd {
+  font-size: 0.96rem;
+  line-height: 1.45;
+}
+
+.log > li {
+  padding-left: 22px;
+  padding-bottom: 34px;
+  border-left: 1px solid var(--linha);
+}
+
+.log > li:last-child {
+  padding-bottom: 0;
+}
+
+.estado {
+  font-family: var(--fonte-mono);
+  font-size: 0.78rem;
+  color: var(--texto-2);
+}
+
+.estado.atual {
+  color: var(--ambar);
+}
+
+.log h3 {
+  font-family: var(--fonte-tela);
+  font-size: 2.1rem;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.cargo {
+  margin-bottom: 8px;
+  color: var(--magenta);
+  font-size: 0.98rem;
+}
+
+.feitos li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.feitos li + li {
+  margin-top: 6px;
+}
+
+.feitos li::before {
+  content: ">";
+  position: absolute;
+  left: 0;
+  font-family: var(--fonte-mono);
+  color: var(--magenta);
+}
+
+.pilha {
+  margin-top: 10px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+@media (max-width: 820px) {
+  .grade {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .historia img {
+    width: 38%;
+  }
 }
 </style>

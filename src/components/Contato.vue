@@ -1,157 +1,225 @@
 <template>
-  <v-container style="max-width: 100vw; height: auto;">
-    <br>
-    <v-container>
-      <v-row justify="center">
-        <h1>
-          Entre em contato <span style="color: #cd00cd;">Comigo!</span>
-        </h1>
-      </v-row>
-      <br><br>
-      <v-form v-model="form" @submit.prevent="enviar">
-        <v-row justify="center">
-          <v-col cols="12" sm="6" md="6">
-            <v-text-field
-              v-model="dados.nome"
-              clearable
-              variant="outlined"
-              :rules="[obrigatorio]"
-              label="Nome completo"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12" sm="6" md="6">
-            <v-text-field
-              v-model="dados.email"
-              clearable
-              variant="outlined"
-              :rules="[obrigatorio, emailValido]"
-              label="Email"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row justify="center">
-          <v-col cols="12" sm="6" md="6">
-            <v-text-field
+  <section class="secao contato">
+    <div class="miolo">
+      <h2 class="titulo"><span>06</span>Contato</h2>
+
+      <form novalidate @submit.prevent="enviar">
+        <div class="campos">
+          <div v-for="campo in campos" :key="campo.nome" class="campo">
+            <label :for="campo.nome">{{ campo.rotulo }}</label>
+            <input
+              v-if="campo.nome === 'telefone'"
+              id="telefone"
               v-model="dados.telefone"
-              clearable
-              variant="outlined"
               v-mask="'(##) # ####-####'"
-              :rules="[obrigatorio, telefoneCompleto]"
-              label="Telefone de contato"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12" sm="6" md="6">
-            <v-text-field
-              v-model="dados.assunto"
-              clearable
-              variant="outlined"
-              :rules="[obrigatorio]"
-              label="Assunto"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row justify="center">
-          <v-col cols="12" sm="12" md="12">
-            <v-textarea
-              auto-grow
+              type="tel"
+              autocomplete="tel"
+              placeholder="(00) 0 0000-0000"
+              :aria-invalid="!!erros.telefone"
+              aria-describedby="erro-telefone"
+            />
+            <input
+              v-else
+              :id="campo.nome"
+              v-model="dados[campo.nome]"
+              :type="campo.tipo"
+              :autocomplete="campo.auto"
+              :aria-invalid="!!erros[campo.nome]"
+              :aria-describedby="`erro-${campo.nome}`"
+            />
+            <p :id="`erro-${campo.nome}`" class="erro">
+              {{ erros[campo.nome] }}
+            </p>
+          </div>
+
+          <div class="campo inteiro">
+            <label for="mensagem">Mensagem</label>
+            <textarea
+              id="mensagem"
               v-model="dados.mensagem"
-              counter
-              clearable
-              :rules="[obrigatorio]"
-              label="Mensagem..."
-            ></v-textarea>
-          </v-col>
-        </v-row>
-        <v-row justify="center">
-          <v-btn variant="tonal" color="primary" type="submit">
-            <v-icon icon="mdi-send" start></v-icon> Enviar mensagem
-          </v-btn>
-        </v-row>
-      </v-form>
-    </v-container>
-    <v-dialog v-model="dialog" width="auto">
-      <v-card max-width="400" :color="this.colorRetorno" prepend-icon="mdi-account-box-outline" :text="this.texto"
-        title="Retorno do envio de contato">
-        <template v-slot:actions>
-          <v-btn class="ms-auto" text="Fechar" @click="dialog = false"></v-btn>
-        </template>
-      </v-card>
-    </v-dialog>
-  </v-container>
+              rows="6"
+              :aria-invalid="!!erros.mensagem"
+              aria-describedby="erro-mensagem"
+            ></textarea>
+            <p id="erro-mensagem" class="erro">{{ erros.mensagem }}</p>
+          </div>
+        </div>
+
+        <div class="envio">
+          <button class="btn" type="submit" :disabled="enviando">
+            {{ enviando ? "Enviando..." : "Enviar mensagem" }}
+          </button>
+          <p
+            class="retorno"
+            :class="{ falhou: retorno.tipo === 'erro' }"
+            role="status"
+          >
+            {{ retorno.texto }}
+          </p>
+        </div>
+      </form>
+    </div>
+  </section>
 </template>
 
 <script>
-// Importando emailjs-com
-import emailjs from 'emailjs-com';
+import emailjs from "emailjs-com";
+
+const vazio = () => ({
+  nome: "",
+  email: "",
+  telefone: "",
+  assunto: "",
+  mensagem: "",
+});
 
 export default {
   name: "Contato",
   data: () => ({
-    form: false,
-    dados: {
-      nome: '',
-      email: '',
-      telefone: '',
-      assunto: '',
-      mensagem: '',
-    },
-    dialog: false,
-    texto: '',
-    colorRetorno: '',
-    // Regras de validação
-    obrigatorio: v => !!v || 'Campo é obrigatório',
-    telefoneCompleto: v => (v && v.length === 16) || 'Telefone incompleto',
-    emailValido: v => {
-      const regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-      return regex.test(v) || 'E-mail inválido';
-    }
+    campos: [
+      { nome: "nome", rotulo: "Nome completo", tipo: "text", auto: "name" },
+      { nome: "email", rotulo: "E-mail", tipo: "email", auto: "email" },
+      { nome: "telefone", rotulo: "Telefone" },
+      { nome: "assunto", rotulo: "Assunto", tipo: "text", auto: "off" },
+    ],
+    dados: vazio(),
+    erros: {},
+    enviando: false,
+    retorno: { tipo: "", texto: "" },
   }),
-
   methods: {
+    validar() {
+      const d = this.dados;
+      const obrigatorio = "Campo obrigatório";
+      const erros = {};
+      ["nome", "email", "telefone", "assunto", "mensagem"].forEach((c) => {
+        if (!d[c].trim()) erros[c] = obrigatorio;
+      });
+      const regexEmail = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+      if (!erros.email && !regexEmail.test(d.email)) {
+        erros.email = "E-mail inválido";
+      }
+      if (!erros.telefone && d.telefone.length !== 16) {
+        erros.telefone = "Telefone incompleto";
+      }
+      this.erros = erros;
+      return Object.keys(erros).length === 0;
+    },
     enviar() {
-      if (!this.form) return;
+      this.retorno = { tipo: "", texto: "" };
+      if (!this.validar()) return;
 
+      this.enviando = true;
       emailjs.init("Y3ToB7YpKMHwfV__d");
-
-      emailjs.send('service_4c9jfwh', 'template_rnaa6q6', {
-        nome: this.dados.nome,
-        email: this.dados.email,
-        telefone: this.dados.telefone,
-        assunto: this.dados.assunto,
-        mensagem: this.dados.mensagem,
-      })
-        .then(response => {
-          this.dados = {
-            nome: '',
-            email: '',
-            telefone: '',
-            assunto: '',
-            mensagem: ''
-          };
-
-          this.dialog = true;
-          this.colorRetorno = 'success';
-          this.texto = 'Contato enviado com sucesso!';
+      emailjs
+        .send("service_4c9jfwh", "template_rnaa6q6", { ...this.dados })
+        .then(() => {
+          this.dados = vazio();
+          this.retorno = { tipo: "ok", texto: "Mensagem enviada. Obrigado!" };
         })
-        .catch(error => {
-          console.error('Erro ao enviar email:', error);
-          this.dados = {
-            nome: '',
-            email: '',
-            telefone: '',
-            assunto: '',
-            mensagem: ''
+        .catch((erro) => {
+          console.error("Erro ao enviar email:", erro);
+          this.retorno = {
+            tipo: "erro",
+            texto:
+              "Não consegui enviar. O que você escreveu continua aqui, é só tentar de novo.",
           };
-
-          this.dialog = true;
-          this.colorRetorno = 'error';
-          this.texto = 'Erro ao enviar o contato!';
+        })
+        .finally(() => {
+          this.enviando = false;
         });
     },
-  }
+  },
 };
 </script>
 
 <style scoped>
-/* Você pode adicionar estilos personalizados aqui, se necessário */
+.contato {
+  background: var(--painel);
+}
+
+form {
+  max-width: 820px;
+}
+
+.campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 28px;
+}
+
+.inteiro {
+  grid-column: 1 / -1;
+}
+
+label {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--fonte-mono);
+  font-size: 0.85rem;
+  color: var(--ambar);
+}
+
+label::before {
+  content: "> ";
+  color: var(--magenta);
+}
+
+input,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--linha);
+  border-radius: 0;
+  background: var(--fundo);
+  font-family: var(--fonte-mono);
+  font-size: 1rem;
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--ambar);
+  outline: none;
+}
+
+input::placeholder {
+  color: #6f6570;
+}
+
+[aria-invalid="true"] {
+  border-color: var(--magenta);
+}
+
+.erro {
+  min-height: 1.6em;
+  font-family: var(--fonte-mono);
+  font-size: 0.8rem;
+  color: var(--magenta);
+}
+
+.envio {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 28px;
+  margin-top: 10px;
+}
+
+.retorno {
+  font-family: var(--fonte-mono);
+  font-size: 0.88rem;
+  color: var(--ambar);
+}
+
+.retorno.falhou {
+  color: var(--magenta);
+}
+
+@media (max-width: 620px) {
+  .campos {
+    grid-template-columns: 1fr;
+  }
+}
 </style>

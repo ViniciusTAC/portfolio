@@ -1,85 +1,202 @@
 <template>
-  <v-container fluid style="min-height: 100vh; background-color: #110d11;">
-    <v-row class="pa-4">
-      <h1>
-        <span class="emoji">👋</span>
-        Olá, eu sou Vinícius!
-      </h1>
-    </v-row>
+  <section class="inicio">
+    <div class="miolo">
+      <div class="grade">
+        <div>
+          <p class="prompt">C:\KOVINE&gt; java -jar vinicius.jar</p>
+          <h1 class="nome">Vinícius<br />Tadeu</h1>
+          <p class="chamada">
+            Engenheiro de Software Pleno com foco em back-end: APIs REST e
+            sistemas corporativos em Java e Spring Boot. Hoje evoluo os sistemas
+            internos do Sítio Recanto do Queijo, da regra de negócio ao SQL
+            Server, com integrações e automações em Python.
+          </p>
 
-    <v-row class="pa-0" justify="space-between" align="start">
-      <v-col class="pl-2" cols="12" md="8">
-        <h2>
-          Um Desenvolvedor Full-Stack 👨‍💻
-        </h2>
-        <p>
-          Sou apaixonado por transformar ideias em realidade através do código. Com ampla experiência em
-          desenvolvimento de software, estou sempre buscando aprimorar minhas habilidades técnicas e acompanhar as
-          últimas tendências da indústria.
-          <br><br>
-          Vamos trabalhar juntos para criar algo incrível?
-        </p>
-        <p style="color: #110d11;">Houve {{ contador }} acessos</p>
+          <div class="acoes">
+            <a
+              class="btn"
+              href="/Currículo - Vinicius Tadeu Andrade Costa.pdf"
+              download
+              >Baixar currículo (PDF)</a
+            >
+            <ul class="redes">
+              <li v-for="rede in redes" :key="rede.nome">
+                <a
+                  class="link"
+                  :href="rede.url"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >{{ rede.nome }}</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
 
-        <v-container class="d-flex justify-center flex-wrap">
-          <v-btn variant="outlined" class="ml-3" color="primary" icon="mdi-instagram"
-            href="https://www.instagram.com/vinicius.tac/" target="_blank" rel="noopener noreferrer"></v-btn>
+        <figure class="retrato">
+          <img
+            :src="foto"
+            alt="Vinícius de boné preto e rosa, em frente a uma cachoeira"
+            width="900"
+            height="1200"
+          />
+          <figcaption class="rotulo">Fig. 01: fora do expediente</figcaption>
+        </figure>
+      </div>
 
-          <v-btn variant="outlined" class="ml-3" color="primary" icon="mdi-linkedin"
-            href="https://www.linkedin.com/in/vinícius-tadeu-andrade-costa/" target="_blank"
-            rel="noopener noreferrer"></v-btn>
-
-          <v-btn variant="outlined" class="ml-3" color="primary" icon="mdi-github" href="https://github.com/ViniciusTAC"
-            target="_blank" rel="noopener noreferrer"></v-btn>
-
-          <v-btn variant="outlined" class="ml-3" color="primary" icon="mdi-email"
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=viniciustacosta@gmail.com" target="_blank"
-            rel="noopener noreferrer"></v-btn>
-        </v-container>
-
-        <v-container class="d-flex justify-center mt-4">
-          <v-btn style="background-color: rgba(205, 0, 205, 0.3);" href="/Currículo - Vinicius Tadeu Andrade Costa.pdf" download>
-            <v-icon>mdi-download</v-icon>
-            Baixar Currículo
-          </v-btn>
-        </v-container>
-      </v-col>
-
-      <v-col cols="12" md="4" class="d-flex justify-center align-center">
-        <v-img width="50vw" src="../assets/vinicius-home.jpg" alt="Foto de Vinícius"
-          style="border-radius: 8px; border: 2px solid #ccc;"></v-img>
-      </v-col>
-    </v-row>
-  </v-container>
+      <dl class="ficha">
+        <div v-for="item in ficha" :key="item.nome">
+          <dt class="rotulo">{{ item.nome }}</dt>
+          <dd>{{ item.valor }}</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
 </template>
 
 <script>
+import foto from "../assets/vinicius-home-900.jpg";
+
 export default {
-  name: 'Home',
+  name: "Home",
   data() {
     return {
-      contador: 0
+      foto,
+      redes: [
+        { nome: "GitHub", url: "https://github.com/ViniciusTAC" },
+        {
+          nome: "LinkedIn",
+          url: "https://www.linkedin.com/in/vinicius-tadeu-andrade-costa",
+        },
+        {
+          nome: "E-mail",
+          url: "https://mail.google.com/mail/?view=cm&fs=1&to=viniciustacosta@gmail.com",
+        },
+        { nome: "Instagram", url: "https://www.instagram.com/vinicius.tac/" },
+      ],
+      ficha: [
+        { nome: "Cargo atual", valor: "Engenheiro de Software Pleno" },
+        { nome: "Back-end", valor: "Java, Spring Boot, Node.js, APIs REST" },
+        { nome: "Dados", valor: "SQL Server, MySQL, Python" },
+        { nome: "Front-end", valor: "Angular, PrimeNG, TypeScript, Vue.js" },
+        { nome: "Formação", valor: "Engenharia de Computação, IFMG" },
+      ],
     };
   },
-  created() {
-    this.inicializarContador();
-  },
-  methods: {
-    inicializarContador() {
-      // Verifica se há um contador salvo no localStorage
-      const contadorSalvo = localStorage.getItem("contadorAcessos");
-      this.contador = contadorSalvo ? parseInt(contadorSalvo) : 0;
-      this.incrementarContador();
-    },
-    incrementarContador() {
-      // Incrementa o contador e salva no localStorage
-      this.contador++;
-      localStorage.setItem("contadorAcessos", this.contador);
-    }
-  }
-}
+};
 </script>
 
 <style scoped>
-/* Adicione estilos personalizados aqui, se necessário */
+.inicio {
+  padding-block: clamp(32px, 6vw, 72px) clamp(48px, 7vw, 80px);
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 360px);
+  gap: clamp(32px, 6vw, 80px);
+  align-items: end;
+}
+
+.prompt {
+  font-family: var(--fonte-mono);
+  font-size: 0.92rem;
+  color: var(--ambar);
+}
+
+.nome {
+  margin-top: 14px;
+  font-family: var(--fonte-tela);
+  font-size: clamp(6rem, 17vw, 14rem);
+  font-weight: 400;
+  line-height: 0.8;
+  text-transform: uppercase;
+  text-shadow: 4px 0 0 var(--magenta-base);
+}
+
+.chamada {
+  max-width: 56ch;
+  margin-top: 30px;
+  font-size: 1.15rem;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px 32px;
+  margin-top: 34px;
+}
+
+.redes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+
+.retrato {
+  position: relative;
+}
+
+.retrato img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: 50% 80%;
+  border: 1px solid var(--magenta);
+  box-shadow: 10px 10px 0 var(--magenta-base);
+  filter: contrast(1.08) saturate(0.9);
+}
+
+.retrato figcaption {
+  margin-top: 22px;
+}
+
+.ficha {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-top: clamp(40px, 6vw, 64px);
+  border-top: 1px solid var(--linha);
+  border-bottom: 1px solid var(--linha);
+}
+
+.ficha > div {
+  padding: 16px 16px 16px 0;
+}
+
+.ficha > div + div {
+  padding-left: 16px;
+  border-left: 1px solid var(--linha);
+}
+
+.ficha dd {
+  margin-top: 4px;
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 820px) {
+  .grade {
+    grid-template-columns: 1fr;
+  }
+
+  .retrato {
+    max-width: 320px;
+  }
+
+  .ficha {
+    grid-template-columns: 1fr;
+  }
+
+  .ficha > div,
+  .ficha > div + div {
+    padding: 12px 0;
+    border-left: 0;
+  }
+
+  .ficha > div + div {
+    border-top: 1px solid var(--linha);
+  }
+}
 </style>
