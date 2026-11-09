@@ -72,7 +72,6 @@ export default {
           nome: "E-mail",
           url: "https://mail.google.com/mail/?view=cm&fs=1&to=viniciustacosta@gmail.com",
         },
-        { nome: "Instagram", url: "https://www.instagram.com/vinicius.tac/" },
       ],
       ficha: [
         { nome: "Cargo atual", valor: "Engenheiro de Software Pleno" },
